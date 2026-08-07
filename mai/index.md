@@ -1,26 +1,15 @@
 ---
-title: materials
+title: mai
 ---
 
-# materials
-
-Materials for some seminars
-
-- [pr](pr/)
-- [cr](cr/)
-- [wap](wap/)
-- [mai](mai/)
-
-## All files
+# mai
 
 <button id="sort-toggle" style="margin-bottom:1em;"></button>
 
 <ul class="sortable-list">
-{% assign files = site.static_files %}
+{% assign files = site.static_files | where_exp: "f", "f.path contains '/mai/'" %}
 {% for f in files %}
-  {% unless f.path contains '/.github/' or f.path contains '/assets/' %}
   <li data-time="{{ f.modified_time | date: '%s' }}000"><a href="{{ f.path | relative_url }}">{{ f.name }}</a> <span style="color:#888;font-size:0.9em;">({{ f.modified_time | date: '%Y-%m-%d' }})</span></li>
-  {% endunless %}
 {% endfor %}
 </ul>
 
