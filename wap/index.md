@@ -1,5 +1,6 @@
 ---
 title: wap
+section: wap
 ---
 
 # wap
@@ -9,7 +10,8 @@ title: wap
 <ul class="sortable-list">
 {% assign files = site.static_files | where_exp: "f", "f.path contains '/wap/'" %}
 {% for f in files %}
-  <li data-time="{{ f.modified_time | date: '%s' }}000"><a href="{{ f.path | relative_url }}">{{ f.name }}</a> <span style="color:#888;font-size:0.9em;">({{ f.modified_time | date: '%Y-%m-%d' }})</span></li>
+  {% assign d = site.data.dates[page.section][f.name] %}
+  <li data-time="{% if d %}{{ d | date: '%s' }}000{% else %}0{% endif %}"><a href="{{ f.path | relative_url }}">{{ f.name }}</a> <span style="color:#888;font-size:0.9em;">({% if d %}{{ d | date: '%Y-%m-%d' }}{% else %}-{% endif %})</span></li>
 {% endfor %}
 </ul>
 
