@@ -1,0 +1,17 @@
+{%- comment -%}
+  파일 목록을 최신순으로 출력한다.
+  파일명이 YYMMDD_ 로 시작하므로 이름 역순 정렬 = 최신순 정렬.
+  사용법: {% include filelist.html dir="/pr/" %}
+{%- endcomment -%}
+{%- assign dir = include.dir -%}
+{%- assign files = site.static_files | where_exp: "f", "f.path contains dir" | sort: "name" | reverse -%}
+<ul>
+{%- for f in files %}
+  {%- assign ymd = f.name | slice: 0, 6 -%}
+  {%- assign label = f.name | slice: 7, 200 -%}
+  <li>
+    <a href="{{ f.path | relative_url }}">{{ label }}</a>
+    <span style="color:#888;font-size:0.9em;">20{{ ymd | slice: 0, 2 }}-{{ ymd | slice: 2, 2 }}-{{ ymd | slice: 4, 2 }}</span>
+  </li>
+{%- endfor %}
+</ul>
