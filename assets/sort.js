@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var btn = document.getElementById('sort-toggle');
   if (!list || !btn) return;
 
-  var ascending = true;
+  var ascending = false; // default: newest first
 
   function render() {
     var items = Array.prototype.slice.call(list.children);
